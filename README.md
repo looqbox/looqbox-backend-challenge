@@ -1,7 +1,7 @@
 ### Would you like to work with us? Apply [here](https://looqbox.gupy.io/)!
 
 # Looqbox Backend Challenge
-![Looqbox](https://github.com/looqbox/looqbox-backend-challenge/blob/master/logo.png)
+![Looqbox](https://github.com/looqbox/looqbox-backend-challenge/blob/main/logo.png)
 
 ## Challenge
 In this challenge you will need to build a **Microservice** using the stack below and a provided api.
