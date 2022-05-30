@@ -33,12 +33,12 @@ We use:
 - Draw a **diagram** explaining your architecture.
 
 ### You can't use:
-- Any library that generates code (Example: **Lombok**)
-- Any sorting library, nor any sort methods provided by Java Standard Library. `Comparators` and `Collections.swap` are **OK** to use
+- Any library that generates code (Example: **Lombok**);
+- Any sorting library, nor any sort methods provided by Java Standard Library. `Comparators` and `Collections.swap` are **OK** to use.
 
 ### Observations:
-- The project must support **ALL** existing pokemons in the provided **API**.
-- It’s very important to **explain** your implemented logic of the algorithm used *(For instance, you can use inline comments on the source code)*
+- The project must support **ALL** existing pokemons in the provided **API**;
+- It’s very important to **explain** your implemented logic of the algorithm used *(For instance, you can use inline comments on the source code)*.
 
 ## Bonus Points
 - Design Patterns
@@ -49,4 +49,4 @@ We use:
 ## Useful links
 - [Spring Framework](https://spring.io/)
 - [Gradle](https://gradle.org/)
-- [PokeApi docs](https://pokeapi.co/docs/v2.html)
+- [PokeApi docs](https://pokeapi.co/docs/v2)
