@@ -1,52 +1,114 @@
 ## Would you like to work with us? Apply [here](https://looqbox.gupy.io/)!
 
-![Looqbox](https://github.com/looqbox/looqbox-backend-challenge/blob/main/logo.png)
+![Looqbox](logo.png)
 # Backend Challenge
 
 ## Description
-In this challenge you will need to build a **MICROSERVICE** using the stack below and the provided **API**.
 
-We will **NOT** use anything from your project other than evaluate your skills and you are free to use this project in your portfolio.
+In this challenge you will need to build a **MICROSERVICE** using the stack below and the provided API.
+
+We will **NOT** use anything from your project other than evaluate your skills.
 
 ## Stack
-We use:
-- Java/Kotlin (We accept **ANY** of them in the test)
-- `Spring Boot` for the framework
-- `Gradle` for dependency management and local deployment
+
+You need to use:
+
+- **Java 11+** or **Kotlin 1.4+** (you choose)
+- **Spring Boot** for the framework
+- **Gradle** for dependency management and local deployment
 
 ## Submitting
+
 - Create a public repository with your code in it.
-- Send the link to the **HR** team for evaluation.
+- Send the link to the HR team for evaluation.
 
 # Guidelines
-### You need to make a HTTP REST API that:
-- Consumes the [PokeAPI](https://pokeapi.co/) data.
-- Provides an endpoint to query pokemons based on the substring of its name. For example:
-  - Request: `GET /pokemons?name=pidge`
-  - Expected response: ```{"result" : ["pidgey", "pidgeotto", "pidgeot"]}```
-- Implement a highlight regarding the piece of its queried name. For example:
-  - The queried name was `pi`
-  - The highlight object must be ```{"name": "pikachu", "highlight": "<pre>pi</pre>kachu"}```
-- You need to apply sorting using a algorithm of your choice for: 
-  - Pokemon name's length in crescent order; 
-  - Pokemon name's alphabetical order.
+
+You will build a REST API that must comply with **ALL** the specified requirements below.
+
+## Functional Requirements
+
+- Consume the [PokéAPI](https://pokeapi.co/docs/v2) data.
+- Create and expose 2 endpoints:
+
+**1. GET /pokemons**
+
+- **query**: String, mandatory
+- **sort**: String/Enum, optional (to the user), defaults to <u>alphabetical</u> sorting in case the parameter is not provided
+
+The idea behind this endpoint is to be able to search by pokémons by their name - the user will send a **part** (any part) of the pokémon **name** to this endpoint, and the service must reply with a list of the pokémons.
+
+The search must be case **insensitive**. The users have to have the possibility to also specify what kind of sorting they want, and the service must comply and sort the pokémon list by the specified order (more on sort types below). The returned JSON must comply with the following format (the pokemon names are just an example):
+
+```JSON
+{
+   "result": [
+      "pidgey",
+      "pidgeotto",
+      "pidgeot"
+   ]
+}
+```
+
+**2. GET /pokemons/highlight**
+
+- **query**: String, mandatory
+- **sort**: String/Enum, optional (to the user), defaults to <u>alphabetical</u> sorting in case the parameter is not provided
+
+This endpoint has, for the most part, the same requirements as the first one (must receive the same parameters in the same way), the only difference is the response requirement: alongside the pokémon name, the response must also highlight the substring that matched the pokémon name. The way you must do that is by surrounding the substring with `<pre> </pre>` tags.
+
+Assuming that the user has searched for “pi”, that would be the expected response (the results were truncated for simplicity purposes).
+
+```JSON
+{
+  "result": [
+    {
+        "name": "pichu",
+        "highlight": "<pre>pi</pre>chu"
+    },
+    {
+        "name": "pikachu",
+        "highlight": "<pre>pi</pre>kachu"
+    }
+  ]
+}
+```
+
+- Pick and implement a **sorting algorithm** of your choice. Then, use this algorithm to provide sorting support on the two implemented endpoints. Your service must provide support for at least these two sorting options:
+  - **Alphabetical**: pokémon name's length in crescent order;
+  - **Length**: pokémon name's length in crescent order.
+
+- All Spring dependency injection must be done through constructor injection (you can’t use @Autowired).
+
+## Out of scope:
+
+- [Java Records](https://www.baeldung.com/java-record-keyword)
+- Any **sorting library**, nor anything related to sorting from the Java/Kotlin Standard Library, that includes: Collections.sort, Collections.swap, Comparators, etc.
+- Any **caching library** (if you want to implement cache, you must implement it manually).
+- Any **automatic task scheduler** (for recurring tasks) library. If you want to implement a feature that uses automatic task scheduling, you must only use Java/Kotlin Standard Library or your own classes and methods.
+
+## Non-functional Requirements
+
+- You need to **explain** your implemented logic of the sorting algorithm used (for instance, you can use inline comments on the source code).
+- Explain the **Big-Ω** of your sorting algorithms.
+- The project must consume and expose **ALL** existing pokémons from the **PokéAPI**.
 - Draw a **diagram** explaining your architecture.
+- Your API must be built with both performance and maintainability in mind.
+- Identify bottleneck points in your code, if any, and provide a possible solution for them.
 
-### You can't use:
-- Any library that generates code (Example: **Lombok**);
-- Any sorting library, nor any sort methods provided by Java Standard Library. `Comparators` and `Collections.swap` are **OK** to use.
+## Out of scope:
 
-### Observations:
-- The project must support **ALL** existing pokemons in the provided **API**;
-- It’s very important to **explain** your implemented logic of the algorithm used *(For instance, you can use inline comments on the source code)*.
+- Libraries that auto generate code, such as Lombok, Feign Client, Retrofit2. Spring Boot annotations are OK to use.
 
-## Bonus Points
+# Bonus Points
+
 - Design Patterns
 - Unit Testing
 - Dockerize the application
-- Explain the **Big-Ω** of your sorting algorithms
+- Caching
 
-## Useful links
+# Useful links
+
 - [Spring Framework](https://spring.io/)
 - [Gradle](https://gradle.org/)
-- [PokeApi docs](https://pokeapi.co/docs/v2)
+- [PokéApi docs](https://pokeapi.co/docs/v2)
