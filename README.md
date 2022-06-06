@@ -36,9 +36,9 @@ You will build a REST API that must comply with **ALL** the specified requiremen
 - **query**: String, mandatory
 - **sort**: String/Enum, optional (to the user), defaults to <u>alphabetical</u> sorting in case the parameter is not provided
 
-The idea behind this endpoint is to be able to search by pokémons by their name - the user will send a **part** (any part) of the pokémon **name** to this endpoint, and the service must reply with a list of the pokémons.
+The idea behind this endpoint is to be able to search by pokémons by their name - the user will send a **part** (any part) of the pokémon **name** as the `query` param to this endpoint, and the service must reply with a list of the pokémons. The search must be case **insensitive**. 
 
-The search must be case **insensitive**. The users have to have the possibility to also specify what kind of sorting they want, and the service must comply and sort the pokémon list by the specified order (more on sort types below). The returned JSON must comply with the following format (the pokemon names are just an example):
+Also, the user has to have the possibility to also specify what kind of sorting they want, and the service must comply and sort the pokémon list by the specified order (more on sort types below). The returned JSON must comply with the following format (the pokémon names are just an example):
 
 ```JSON
 {
@@ -57,7 +57,7 @@ The search must be case **insensitive**. The users have to have the possibility 
 
 This endpoint has, for the most part, the same requirements as the first one (must receive the same parameters in the same way), the only difference is the response requirement: alongside the pokémon name, the response must also highlight the substring that matched the pokémon name. The way you must do that is by surrounding the substring with `<pre> </pre>` tags.
 
-Assuming that the user has searched for “pi”, that would be the expected response (the results were truncated for simplicity purposes).
+Assuming that the user has searched for `pi`, this would be the expected response (the results were truncated for simplicity purposes).
 
 ```JSON
 {
@@ -75,17 +75,18 @@ Assuming that the user has searched for “pi”, that would be the expected res
 ```
 
 - Pick and implement a **sorting algorithm** of your choice. Then, use this algorithm to provide sorting support on the two implemented endpoints. Your service must provide support for at least these two sorting options:
-  - **Alphabetical**: pokémon name's length in crescent order;
-  - **Length**: pokémon name's length in crescent order.
+  - **Alphabetical**: sort alphabetically by the pokémon name in crescent order;
+  - **Length**: sort by the pokémon name's length in crescent order.
 
-- All Spring dependency injection must be done through constructor injection (you can’t use @Autowired).
+- All Spring dependency injection must be done through constructor injection (you can’t use `@Autowired`).
 
 ## Out of scope:
 
 - [Java Records](https://www.baeldung.com/java-record-keyword)
-- Any **sorting library**, nor anything related to sorting from the Java/Kotlin Standard Library, that includes: Collections.sort, Collections.swap, Comparators, etc.
+- Any **sorting library**, nor anything related to sorting from the Java/Kotlin Standard Library, this includes: `Collections.sort`, `Collections.swap`, `Comparators`, etc.
 - Any **caching library** (if you want to implement cache, you must implement it manually).
-- Any **automatic task scheduler** (for recurring tasks) library. If you want to implement a feature that uses automatic task scheduling, you must only use Java/Kotlin Standard Library or your own classes and methods.
+- Any **automatic task scheduler** (for recurring tasks) **library**. If you want to implement a feature that uses automatic task scheduling, you must only use Java/Kotlin Standard Library or your own classes and methods.
+- Libraries that auto generate code, such as Lombok, Feign Client, Retrofit2. Spring Boot annotations are OK to use.
 
 ## Non-functional Requirements
 
@@ -95,10 +96,6 @@ Assuming that the user has searched for “pi”, that would be the expected res
 - Draw a **diagram** explaining your architecture.
 - Your API must be built with both performance and maintainability in mind.
 - Identify bottleneck points in your code, if any, and provide a possible solution for them.
-
-## Out of scope:
-
-- Libraries that auto generate code, such as Lombok, Feign Client, Retrofit2. Spring Boot annotations are OK to use.
 
 # Bonus Points
 
