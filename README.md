@@ -33,10 +33,10 @@ You will build a REST API that must comply with **ALL** the specified requiremen
 
 **1. GET /pokemons**
 
-- **query**: String, mandatory
+- **query**: String, optional, if the query is empty, it should consider all pokemons listed in the PokeAPI.
 - **sort**: String/Enum, optional (to the user), defaults to <u>alphabetical</u> sorting in case the parameter is not provided
 
-The idea behind this endpoint is to be able to search by pokémons by their name - the user will send a **part** (any part) of the pokémon **name** as the `query` param to this endpoint, and the service must reply with a list of the pokémons. The search must be case **insensitive**. If the query is empty, it should consider all pokemons listed in the PokeAPI.
+The idea behind this endpoint is to be able to search by pokémons by their name - the user will send a **part** (any part) of the pokémon **name** as the `query` param to this endpoint, and the service must reply with a list of the pokémons. The search must be case **insensitive**.
 
 Also, the user has to have the possibility to also specify what kind of sorting they want, and the service must comply and sort the pokémon list by the specified order (more on sort types below). The returned JSON must comply with the following format (the pokémon names are just an example):
 
@@ -52,7 +52,7 @@ Also, the user has to have the possibility to also specify what kind of sorting 
 
 **2. GET /pokemons/highlight**
 
-- **query**: String, mandatory
+- **query**: String, optional, if the query is empty, it should consider all pokemons listed in the PokeAPI.
 - **sort**: String/Enum, optional (to the user), defaults to <u>alphabetical</u> sorting in case the parameter is not provided
 
 This endpoint has, for the most part, the same requirements as the first one (must receive the same parameters in the same way), the only difference is the response requirement: alongside the pokémon name, the response must also highlight the substring that matched the pokémon name. The way you must do that is by surrounding the substring with `<pre> </pre>` tags. If the query is empty, it should consider all pokemons listed in the PokeAPI.
