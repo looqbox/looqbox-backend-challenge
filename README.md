@@ -85,8 +85,8 @@ Assuming that the user has searched for `pi`, this would be the expected respons
 - [Java Records](https://www.baeldung.com/java-record-keyword)
 - Any **sorting library**, nor anything related to sorting from the Java/Kotlin Standard Library, this includes: `Collections.sort`, `Collections.swap`, `Comparators`, etc.
 - Any **caching library** (if you want to implement cache, you must implement it manually).
-- Any **automatic task scheduler** (for recurring tasks) **library**. If you want to implement a feature that uses automatic task scheduling, you must only use Java/Kotlin Standard Library or your own classes and methods.
-- Libraries that auto generate code, such as Lombok, Feign Client, Retrofit2. Spring Boot annotations are OK to use.
+- Any **automatic task scheduler library** (for recurring tasks). If you want to implement a feature that uses automatic task scheduling, you must only use Java/Kotlin Standard Library or your own classes and methods.
+- Anything that auto generate code or auto generate implementations for interfaces/abstract classes, such as [Lombok](https://projectlombok.org/features/all), [Feign Client](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html), [Retrofit2](https://square.github.io/retrofit), [Spring Repositories](https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html) (do not mistake with [Spring Stereotypes](http://blog.triadworks.com.br/entendendo-os-stereotypes-do-spring)), etc.
 
 ## Non-functional Requirements
 
