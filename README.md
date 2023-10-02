@@ -13,7 +13,7 @@ We will **NOT** use anything from your project other than evaluate your skills.
 
 You need to use:
 
-- **Java 11+** or **Kotlin 1.4+** (you choose)
+- **Java 11+** or **Kotlin 1.8+** (you choose)
 - **Spring Boot** for the framework
 - **Gradle** for dependency management and local deployment
 
@@ -91,7 +91,7 @@ Assuming that the user has searched for `pi`, this would be the expected respons
 ## Non-functional Requirements
 
 - You need to **explain** your implemented logic of the sorting algorithm used (for instance, you can use inline comments on the source code).
-- Explain the **Big-Ω** of your sorting algorithms.
+- Explain the **Big-θ** of your sorting algorithms.
 - The project must consume and expose **ALL** existing pokémons from the **PokéAPI**.
 - Draw a **diagram** explaining your architecture.
 - Your API must be built with both performance and maintainability in mind.
