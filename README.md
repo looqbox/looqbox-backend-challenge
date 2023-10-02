@@ -13,7 +13,7 @@ We will **NOT** use anything from your project other than evaluate your skills.
 
 You need to use:
 
-- **Java 11+** or **Kotlin 1.8+** (you choose)
+- **Java 11+** or **Kotlin 1.8+** (you choose), here in our stack we use Kotlin.
 - **Spring Boot** for the framework
 - **Gradle** for dependency management and local deployment
 
