@@ -13,7 +13,7 @@ We will **NOT** use anything from your project other than evaluate your skills.
 
 You need to use:
 
-- **Java 11+** or **Kotlin 1.8+** (you choose), here in our stack we use Kotlin.
+- **Java 17+** or **Kotlin 1.8+** (you choose), here in our stack we use Kotlin.
 - **Spring Boot** for the framework
 - **Gradle** for dependency management and local deployment
 
@@ -77,16 +77,6 @@ Assuming that the user has searched for `pi`, this would be the expected respons
 - Pick and implement a **sorting algorithm** of your choice. Then, use this algorithm to provide sorting support on the two implemented endpoints. Your service must provide support for at least these two sorting options:
   - **Alphabetical**: sort alphabetically by the pokémon name in crescent order;
   - **Length**: sort by the pokémon name's length in crescent order.
-
-- All Spring dependency injection must be done through constructor injection (you can’t use `@Autowired`).
-
-## Out of scope:
-
-- [Java Records](https://www.baeldung.com/java-record-keyword)
-- Any **sorting library**, nor anything related to sorting from the Java/Kotlin Standard Library, this includes: `Collections.sort`, `Collections.swap`, `Comparators`, etc.
-- Any **caching library** (if you want to implement cache, you must implement it manually).
-- Any **automatic task scheduler library** (for recurring tasks). If you want to implement a feature that uses automatic task scheduling, you must only use Java/Kotlin Standard Library or your own classes and methods.
-- Anything that auto generate code or auto generate implementations for interfaces/abstract classes, such as [Lombok](https://projectlombok.org/features/all), [Feign Client](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html), [Retrofit2](https://square.github.io/retrofit), [Spring Repositories](https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html) (do not mistake with [Spring Stereotypes](http://blog.triadworks.com.br/entendendo-os-stereotypes-do-spring)), etc.
 
 ## Non-functional Requirements
 
