@@ -1,0 +1,160 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Architecture" id="looqbox-backend-challenge-arch">
+    <mxGraphModel dx="1230" dy="676" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;" value="Looqbox Backend Challenge — Architecture Diagram" vertex="1">
+          <mxGeometry height="30" width="620" x="320" y="5" as="geometry" />
+        </mxCell>
+        <mxCell id="bg-presentation" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;verticalAlign=top;opacity=50;" value="Presentation Layer" vertex="1">
+          <mxGeometry height="120" width="680" x="200" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="bg-business" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=top;opacity=50;" value="Business Logic Layer" vertex="1">
+          <mxGeometry height="165" width="840" x="40" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="bg-infrastructure" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;verticalAlign=top;opacity=50;" value="Infrastructure Layer" vertex="1">
+          <mxGeometry height="140" width="640" x="40" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="bg-sorting" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;verticalAlign=top;opacity=50;" value="Sorting Strategies — Strategy Pattern&#xa;Merge Sort  Θ(n log n) all cases" vertex="1">
+          <mxGeometry height="350" width="370" x="940" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="bg-external-api" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;fontStyle=1;verticalAlign=top;opacity=50;" value="External Service" vertex="1">
+          <mxGeometry height="110" width="320" x="290" y="716.5" as="geometry" />
+        </mxCell>
+        <mxCell id="docker-note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#999999;fontColor=#333333;fontSize=11;dashed=1;" value="&lt;b&gt;Docker&lt;/b&gt; (Multi-stage Build)&#xa;Build: eclipse-temurin:21-jdk-alpine&#xa;Run: eclipse-temurin:21-jre-alpine&#xa;Expose: 8080" vertex="1">
+          <mxGeometry height="75" width="230" x="1320" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="http-client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" value="&lt;b&gt;HTTP Client&lt;/b&gt;&#xa;(Browser / cURL / Postman)" vertex="1">
+          <mxGeometry height="65" width="220" x="470" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="controller" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;PokemonController&lt;/b&gt;&lt;br&gt;@RestController · @RequestMapping(&quot;/pokemons&quot;)&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;GET /pokemons?query&amp;amp;sort  →  PokemonListResponse&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;GET /pokemons/highlight?query&amp;amp;sort  →  PokemonHighlightResponse&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="82" width="380" x="350" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="dtos" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="&lt;b&gt;DTOs&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• PokemonListResponse&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• PokemonHighlightResponse&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• PokemonHighlightItem&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• SortType (enum)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="125" width="165" x="55" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="service" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="&lt;b&gt;PokemonService&lt;/b&gt;&lt;br&gt;@Service · Constructor Injection&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• searchPokemons(query, sortType): PokemonListResponse&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• searchPokemonsWithHighlight(query, sortType): PokemonHighlightResponse&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• Selects strategy via EnumMap · Filters by substring (case-insensitive)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="115" width="470" x="290" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="cache" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="&lt;b&gt;PokemonCache&lt;/b&gt;&lt;br&gt;@Component&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• Manual in-memory cache&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• TTL: 1 hour (3 600 000 ms)&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• Thread-safe: ReentrantReadWriteLock&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="250" x="60" y="561" as="geometry" />
+        </mxCell>
+        <mxCell id="pokeapi-client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="&lt;b&gt;PokeApiClient&lt;/b&gt;&lt;br&gt;@Component&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• fetchAllPokemonNames(): List&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• Spring RestClient&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• limit=100000 (fetches all pokemons at once)&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="280" x="370" y="561" as="geometry" />
+        </mxCell>
+        <mxCell id="sorting-iface" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="&amp;lt;&amp;gt;&lt;br&gt;&lt;b&gt;SortingStrategy&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+ sort(List): List&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+ mergeSort(List): List&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+ merge(left, right): List&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="285" x="970" y="349" as="geometry" />
+        </mxCell>
+        <mxCell id="sorting-alpha" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="&lt;b&gt;AlphabeticalSortingStrategy&lt;/b&gt;&lt;br&gt;@Component&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• merge(): String.compareTo()&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• Crescent alphabetical order&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75" width="180" x="948" y="561" as="geometry" />
+        </mxCell>
+        <mxCell id="sorting-length" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="&lt;b&gt;LengthSortingStrategy&lt;/b&gt;&lt;br&gt;@Component&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• merge(): by name.length()&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;• Tiebreak: alphabetical order&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="170" x="1132" y="563.5" as="geometry" />
+        </mxCell>
+        <mxCell id="pokeapi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;" value="&lt;b&gt;PokéAPI&lt;/b&gt; (External)&#xa;https://pokeapi.co/api/v2&#xa;GET /pokemon?limit=100000&amp;offset=0" vertex="1">
+          <mxGeometry height="65" width="280" x="310" y="739" as="geometry" />
+        </mxCell>
+        <mxCell id="e-client-ctrl" edge="1" parent="1" source="http-client" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;exitX=0.642;exitY=1.008;exitDx=0;exitDy=0;fontStyle=1;exitPerimeter=0;entryX=0.688;entryY=-0.003;entryDx=0;entryDy=0;entryPerimeter=0;" target="controller" value="HTTP GET Request">
+          <mxGeometry relative="1" x="-0.2842" y="-1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="610" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-ctrl-svc" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;entryX=0.573;entryY=0.006;entryDx=0;entryDy=0;entryPerimeter=0;" target="service" value="delegates">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="237" />
+              <mxPoint x="560" y="286" />
+            </Array>
+            <mxPoint x="560" y="237" as="sourcePoint" />
+            <mxPoint x="580" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-svc-cache" edge="1" parent="1" source="service" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;exitX=0.128;exitY=1.019;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" target="cache" value="1. isValid() / getPokemons()&#xa;   setPokemons() on cache miss">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="470" />
+              <mxPoint x="350" y="510" />
+              <mxPoint x="185" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-svc-apiclient" edge="1" parent="1" source="service" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="pokeapi-client" value="2. fetchAllPokemonNames()&#xa;   (only on cache miss)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-svc-sort" edge="1" parent="1" source="service" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="sorting-iface" value="3. sortingStrategies&#xa;   .get(sortType).sort(filtered)">
+          <mxGeometry relative="1" x="0.0011" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-client-pokeapi" edge="1" parent="1" source="pokeapi-client" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.713;entryY=0.04;entryDx=0;entryDy=0;entryPerimeter=0;" target="pokeapi" value="HTTP GET (external call)">
+          <mxGeometry relative="1" x="-0.094" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-dtos-svc" edge="1" parent="1" source="dtos" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.002;entryY=0.549;entryDx=0;entryDy=0;entryPerimeter=0;" target="service" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dtos-ctrl" edge="1" parent="1" source="dtos" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" value="uses">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="138" y="200" />
+            </Array>
+            <mxPoint x="350" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e-docker" edge="1" parent="1" source="docker-note" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;dashed=1;endArrow=none;strokeColor=#999999;" target="http-client" value="wraps">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;" value="&lt;b&gt;Legend&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="100" x="1320" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-presentation" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Presentation Layer" vertex="1">
+          <mxGeometry height="30" width="230" x="1320" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-business" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="Business Logic Layer" vertex="1">
+          <mxGeometry height="30" width="230" x="1320" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-infra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" value="Infrastructure Layer" vertex="1">
+          <mxGeometry height="30" width="230" x="1320" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-sorting" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Sorting Strategies (Strategy Pattern)" vertex="1">
+          <mxGeometry height="30" width="230" x="1320" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-dto" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="Data Transfer Objects (DTOs)" vertex="1">
+          <mxGeometry height="30" width="230" x="1320" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-external" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;" value="External / Docker" vertex="1">
+          <mxGeometry height="30" width="230" x="1320" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#999999;fontSize=11;align=left;spacingLeft=8;" value="&lt;b&gt;Request Flow&lt;/b&gt;&lt;br&gt;&lt;br&gt;1. Client sends GET /pokemons&lt;br&gt;2. Controller parses query &amp;amp; sort params&lt;br&gt;3. Service checks PokemonCache&lt;br&gt;   &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;a. Cache HIT → use cached list&lt;br&gt;   &lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;b. Cache MISS → call PokeApiClient&lt;br&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;      → fetch from PokéAPI (HTTP)&lt;br&gt;      → store in cache (TTL 1h)&lt;/blockquote&gt;4. Filter list by query substring&lt;br&gt;5. Sort filtered list via Strategy&lt;br&gt;6. Return JSON response" vertex="1">
+          <mxGeometry height="215" width="235" x="1320" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="lxTTWOeep8bD0eavxRKV-2" edge="1" parent="1" source="sorting-length" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;dashed=1;endArrow=block;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" value="implements">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1217" y="450" />
+            </Array>
+            <mxPoint x="1220" y="562" as="sourcePoint" />
+            <mxPoint x="1217" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lxTTWOeep8bD0eavxRKV-4" edge="1" parent="1" source="sorting-alpha" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;dashed=1;endArrow=block;endFill=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.515;exitY=0.008;exitDx=0;exitDy=0;exitPerimeter=0;" target="sorting-iface" value="implements">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1041" y="560" />
+              <mxPoint x="1041" y="560" />
+              <mxPoint x="1041" y="460" />
+              <mxPoint x="1041" y="460" />
+            </Array>
+            <mxPoint x="1038" y="560" as="sourcePoint" />
+            <mxPoint x="1037.9" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
