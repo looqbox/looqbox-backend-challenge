@@ -1,115 +1,199 @@
-## Would you like to work with us? Apply [here](https://looqbox.gupy.io/)!
+# Pokémon REST API — Backend Challenge
 
-![Looqbox](logo.png)
-# Backend Challenge
+Microserviço em **Kotlin** (toolchain **Java 21**), **Spring Boot 3** e **Gradle**, com **WebFlux**. Consome a **PokéAPI** via **WebClient**.
 
-## Description
+## O que a aplicação implementa
 
-In this challenge you will need to build a **MICROSERVICE** using the stack below and the provided API.
+- ✅ **Ordenação manual** — quicksort e comparações escritas à mão; **sem** `Comparator`, `sortedWith`, `compareBy`, `Collections.sort`, etc.
+- ✅ **Busca textual** — substring **case insensitive** sobre nomes.
+- ✅ **Highlight** — envolve o match em `<pre>…</pre>` no JSON de resposta.
+- ✅ **Cache manual em RAM**.
+- ✅ **Docker** — `Dockerfile` multi-stage + `docker-compose.yml`.
 
-We will **NOT** use anything from your project other than evaluate your skills.
+## 📚 Documentação
 
-## Stack
+Os 5 documentos a seguir contém as explicações e respostas de todos os requisitos não funcionais do desafio
 
-You need to use:
+| Documento | Conteúdo |
+|-----------|-----------|
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Camadas, fluxo de dados, padrões, SOLID |
+| [sorting-algorithm.md](sorting-algorithm.md) |Explicações sobre: Quicksort, critérios, Big-Θ |
+| [bottlenecks.md](bottlenecks.md) | Gargalos da aplicação e possíveis melhorias |
+| [performance.md](performance.md) | Explicações sobre performance(foco em cache) |
+| [metrics.md](metrics.md) | Métricas de observabilidade(actuator, micrometer, snapshot do cache) |
 
-- **Java 21+** or **Kotlin 1.9+** (you choose), here in our stack we use Kotlin.
-- **Spring Boot** for the framework
-- **Gradle** for dependency management and local deployment
+##  Arquitetura (visão geral)
 
-## Submitting
+O projeto segue **Layered Architecture** por pacotes: prioriza **separação de responsabilidades**, **alta coesão**, **baixo acoplamento**, **testabilidade** e evolução sem “god classes”. Detalhes, diagramas e correlação SOLID: **[ARCHITECTURE.md](ARCHITECTURE.md)**.
 
+### 📌 Fluxo arquitetural (resumo)
+![Fluxo arquitetural](docs/architecture-flow.png)
 
-- Make a fork of this repository
-- Create your branch
-- ⚠️ Do a initial Commit when you start
-- ⚠️ Do a final commit when you finish
-- When you're done send us a pull request
+## 📂 Estrutura das camadas (`com.leonardo.pokemonapi`)
+o DESIGN pattern utilizado foi o **Layered Architecture**
+```text	
+└─ src/
+   ├─ main/
+   │  ├─ kotlin/
+   │  │  └─ com/
+   │  │     └─ leonardo/
+   │  │        └─ pokemonapi/
+   │  │           ├─ PokemonApiApplication.kt
+   │  │           ├─ cache/
+   │  │           │  └─ PokemonCatalogCache.kt
+   │  │           ├─ client/
+   │  │           │  └─ PokeApiClient.kt
+   │  │           ├─ config/
+   │  │           │  └─ WebClientConfig.kt
+   │  │           ├─ controller/
+   │  │           │  ├─ CacheCatalogMetricsController.kt
+   │  │           │  ├─ PokemonHighlightController.kt
+   │  │           │  ├─ PokemonListController.kt
+   │  │           │  └─ RootController.kt
+   │  │           ├─ dto/
+   │  │           │  └─ response/
+   │  │           │     ├─ PokemonCatalogCacheMetricsResponse.kt
+   │  │           │     ├─ PokemonHighlightResponse.kt
+   │  │           │     └─ PokemonListResponse.kt
+   │  │           ├─ exception/
+   │  │           │  ├─ PokeApiIntegrationException.kt
+   │  │           │  ├─ PokemonApplicationLifecycleException.kt
+   │  │           │  ├─ PokemonBackgroundJobException.kt
+   │  │           │  ├─ PokemonCatalogFetchException.kt
+   │  │           │  ├─ PokemonCatalogStorageException.kt
+   │  │           │  ├─ PokemonDataProcessingException.kt
+   │  │           │  └─ PokemonReactiveWebException.kt
+   │  │           ├─ mapper/
+   │  │           │  ├─ PokemonHighlightMapper.kt
+   │  │           │  └─ PokemonListMapper.kt
+   │  │           ├─ schedulers/
+   │  │           │  ├─ CacheMetricsScheduler.kt
+   │  │           │  ├─ CachePreRefreshScheduler.kt
+   │  │           │  └─ StaleWhileRevalidateScheduler.kt
+   │  │           ├─ service/
+   │  │           │  ├─ PokemonCatalogCacheMetricsService.kt
+   │  │           │  ├─ PokemonFetchService.kt
+   │  │           │  ├─ PokemonFilterService.kt
+   │  │           │  ├─ PokemonHighlightSearchService.kt
+   │  │           │  ├─ PokemonListSearchService.kt
+   │  │           │  ├─ PokemonResponseService.kt
+   │  │           │  └─ PokemonSortService.kt
+   │  │           └─ sorting/
+   │  │              ├─ AlphabeticalPokemonNameSorter.kt
+   │  │              ├─ LengthPokemonNameSorter.kt
+   │  │              ├─ ManualQuicksort.kt
+   │  │              ├─ PokemonNameComparisons.kt
+   │  │              ├─ PokemonNameSorter.kt
+   │  │              └─ PokemonSortType.kt
 
-# Guidelines
-
-You will build a REST API that must comply with **ALL** the specified requirements below.
-
-## Functional Requirements
-
-- Consume the [PokéAPI](https://pokeapi.co/docs/v2) data.
-- Create and expose 2 endpoints:
-
-**1. GET /pokemons**
-
-- **query**: String, optional, if the query is empty, it should consider all pokemons listed in the PokeAPI.
-- **sort**: String/Enum, optional (to the user), defaults to <u>alphabetical</u> sorting in case the parameter is not provided
-
-The idea behind this endpoint is to be able to search by pokémons by their name - the user will send a **part** (any part) of the pokémon **name** as the `query` param to this endpoint, and the service must reply with a list of the pokémons. The search must be case **insensitive**.
-
-Also, the user has to have the possibility to also specify what kind of sorting they want, and the service must comply and sort the pokémon list by the specified order (more on sort types below). The returned JSON must comply with the following format (the pokémon names are just an example):
-
-```JSON
-{
-   "result": [
-      "pidgey",
-      "pidgeotto",
-      "pidgeot"
-   ]
-}
 ```
 
-**2. GET /pokemons/highlight**
 
-- **query**: String, optional, if the query is empty, it should consider all pokemons listed in the PokeAPI.
-- **sort**: String/Enum, optional (to the user), defaults to <u>alphabetical</u> sorting in case the parameter is not provided
+## ⚡ Ordenação
 
-This endpoint has, for the most part, the same requirements as the first one (must receive the same parameters in the same way), the only difference is the response requirement: alongside the pokémon name, the response must also highlight the substring that matched the pokémon name. The way you must do that is by surrounding the substring with `<pre> </pre>` tags. If the query is empty, it should consider all pokemons listed in the PokeAPI.
+Resumo: **quicksort**; complexidade e critérios em **[sorting-algorithm.md](sorting-algorithm.md)**. Melhoria futura (sort híbrido): **[bottlenecks.md](bottlenecks.md)**.
 
-Assuming that the user has searched for `pi`, this would be the expected response (the results were truncated for simplicity purposes).
+## 🛡️ Engenharia de qualidade
 
-```JSON
+- ✅ **Injeção por construtor** — **sem** `@Autowired` / field injection.
+- ✅ **Sem “codegen” proibido pelo desafio** — sem Lombok, Feign, Spring Data JPA, etc.; Kotlin `data class` para DTOs (não são Java Records).
+- ✅ **Agendamento** — só JDK (`ScheduledExecutorService`), alinhado ao enunciado.
+- ✅ **Testes** — JUnit 5, AssertJ, `reactor-test` onde faz sentido.
+
+## 🐳 Como executar
+
+**Pré-requisitos:** Docker + Docker Compose *(ou JDK 21 local para `./gradlew bootRun`)*.
+
+Na raiz do projeto:
+
+```bash
+docker compose up --build
+```
+
+Encerrar:
+
+```bash
+docker compose down
+```
+
+**Estratégia Docker:** multi-stage build (Gradle compila → JRE fina), imagem base **Eclipse Temurin 21**, porta **8080**.
+
+## 🛣️ Endpoints
+
+### 1. Listagem — `GET /pokemons`
+
+| Parâmetro | Descrição |
+|-----------|-------------|
+| `query` | Opcional; substring **case insensitive**; vazio = todos. |
+| `sort` | Opcional; `ALPHABETICAL` / `ALPHA` / `LENGTH` (ver `PokemonSortType`). |
+
+**Exemplo:** `GET http://localhost:8080/pokemons?query=pika&sort=ALPHABETICAL`
+
+```json
+{ "result": ["pikachu"] }
+```
+
+### 2. Highlight — `GET /pokemons/highlight`
+
+**Exemplo:** `GET http://localhost:8080/pokemons/highlight?query=pi&sort=LENGTH`
+
+```json
 {
   "result": [
-    {
-        "name": "pichu",
-        "highlight": "<pre>pi</pre>chu"
-    },
-    {
-        "name": "pikachu",
-        "highlight": "<pre>pi</pre>kachu"
-    }
+    { "name": "pichu", "highlight": "<pre>pi</pre>chu" },
+    { "name": "pikachu", "highlight": "<pre>pi</pre>kachu" }
   ]
 }
 ```
 
-- Pick and implement a **sorting algorithm** of your choice. Then, use this algorithm to provide sorting support on the two implemented endpoints. Your service must provide support for at least these two sorting options:
-  - **Alphabetical**: sort alphabetically by the pokémon name in crescent order;
-  - **Length**: sort by the pokémon name's length in crescent order.
+### 3. Operacional — `GET /internal/cache-catalog/metrics`
 
-- All Spring dependency injection must be done through constructor injection (you can’t use `@Autowired`).
+Snapshot do cache (sem lista de nomes). Ver **[metrics.md](metrics.md)**.
 
-## Out of scope:
+## 🧪 Testes
 
-- [Java Records](https://www.baeldung.com/java-record-keyword)
-- Any **sorting library**, nor anything related to sorting from the Java/Kotlin Standard Library, this includes: `Collections.sort`, `Collections.swap`, `Comparators`, etc.
-- Any **caching library** (if you want to implement cache, you must implement it manually).
-- Any **automatic task scheduler library** (for recurring tasks). If you want to implement a feature that uses automatic task scheduling, you must only use Java/Kotlin Standard Library or your own classes and methods.
-- Anything that auto generate code or auto generate implementations for interfaces/abstract classes, such as [Lombok](https://projectlombok.org/features/all), [Feign Client](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html), [Retrofit2](https://square.github.io/retrofit), [Spring Repositories](https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html) (do not mistake with [Spring Stereotypes](http://blog.triadworks.com.br/entendendo-os-stereotypes-do-spring)), etc.
+Execute na **raiz do projeto** (`pokemon.api`).
 
-## Non-functional Requirements
+### Com JDK 21 instalado
 
-- You need to **explain** your implemented logic of the sorting algorithm used (for instance, you can use inline comments on the source code).
-- Explain the **Big-θ** of your sorting algorithms.
-- The project must consume and expose **ALL** existing pokémons from the **PokéAPI**.
-- Draw a **diagram** explaining your architecture.
-- Your API must be built with both performance and maintainability in mind.
-- Identify bottleneck points in your code, if any, and provide a possible solution for them.
+| Ambiente | Comando |
+|----------|---------|
+| Git Bash / Linux / macOS | `./gradlew test` |
+| PowerShell / CMD (Windows) | `.\gradlew.bat test` |
 
-# Bonus Points
+### Sem JDK 21 (Docker)
 
-- Design Patterns
-- Unit Testing
-- Dockerize the application
-- Caching
+O Docker precisa estar em execução.
 
-# Useful links
+| Ambiente | Comando |
+|----------|---------|
+| **PowerShell** (Windows) | `.\run-tests.ps1` |
+| **Git Bash** (Linux / macOS / Windows) | `bash run-tests.sh` |
 
-- [Spring Framework](https://spring.io/)
-- [Gradle](https://gradle.org/)
-- [PokéApi docs](https://pokeapi.co/docs/v2)
+> No Git Bash, **não** use `.\run-tests.ps1` — esse script é só para PowerShell. O `run-tests.sh` já define `MSYS_NO_PATHCONV=1` no Windows.
+
+### Relatório HTML (após os scripts Docker)
+
+Quando a execução no terminal terminar (`BUILD SUCCESSFUL` ou `BUILD FAILED`), o sistema pode exibir um **pop-up** pedindo para escolher um navegador para abrir um arquivo. Selecione o browser de sua preferência (Chrome, Edge, Firefox, etc.).
+
+O relatório Gradle/JUnit abre em `build/reports/tests/test/index.html` e mostra o resumo dos testes (total, falhas, ignorados, duração e taxa de sucesso por pacote), como no exemplo abaixo:
+
+![Relatório de testes Gradle](docs/test-report.png)
+
+## 📊 Gargalos & performance
+
+Análise estruturada: **[bottlenecks.md](bottlenecks.md)** · modelo de custo e leitura de métricas: **[performance.md](performance.md)**.
+
+## 👨‍💻 Stack tecnológica
+
+| Tecnologia | Finalidade |
+|------------|------------|
+| Kotlin | Linguagem |
+| Java 21 (toolchain) | Runtime / compilação |
+| Spring Boot 3 | Framework |
+| Spring WebFlux | REST reativo |
+| WebClient | Cliente HTTP PokéAPI |
+| Gradle | Build |
+| Docker | Containerização |
+| JUnit 5 / AssertJ / reactor-test | Testes |
+| Spring Boot Actuator | Health / metrics |
