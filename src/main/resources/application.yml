@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: pokemon-api
+
+# Cache manual da lista completa da PokéAPI (TTL em ms; padrão 1 hora).
+pokemon:
+  catalog-cache-ttl-millis: 3600000
+  cache-pre-refresh-initial-delay-millis: 10000
+  stale-while-revalidate-interval-millis: 120000
+  cache-metrics-interval-millis: 300000
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+logging:
+  level:
+    root: INFO
